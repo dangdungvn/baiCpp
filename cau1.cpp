@@ -53,7 +53,19 @@ bool tim(string name, string word)
 }
 void xapXep(thiSinh svi[], int n)
 {
-    sort(svi, svi + n, cmp);
+    for (int i = 0; i < n; i++)
+    {
+        thiSinh t;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (svi[i].name < svi[j].name)
+            {
+                t = svi[i];
+                svi[i] = svi[j];
+                svi[j] = t;
+            }
+        }
+    }
     cout << left << setw(20) << "Ma Sinh vien" << setw(30) << "Ten Sinh vien" << setw(10) << "Tong diem" << endl;
     for (int i = 0; i < n; i++)
     {
