@@ -36,14 +36,15 @@ string thiSinh::getName()
 {
     return this->name;
 }
-bool cmp(thiSinh a, thiSinh b)
-{
-    return a.getName() < b.getName();
-}
-bool cmp1(thiSinh a, thiSinh b)
-{
-    return a.tongDiem() > b.tongDiem();
-}
+// bool cmp(thiSinh a, thiSinh b)
+// {
+//     return a.getName() < b.getName();
+// }
+
+// bool cmp1(thiSinh a, thiSinh b)
+// {
+//     return a.tongDiem() > b.tongDiem();
+// }
 bool tim(string name, string word)
 {
     for (char &x : name)
@@ -74,14 +75,14 @@ void xapXep(thiSinh tsi[], int n)
         tsi[i].out();
     }
 }
-void xapXep1(thiSinh tsi[], int n)
-{
-    sort(tsi, tsi + n, cmp);
-    for (int i = 0; i < n; i++)
-    {
-        tsi[i].out();
-    }
-}
+// void xapXep1(thiSinh tsi[], int n)
+// {
+//     sort(tsi, tsi + n, cmp);
+//     for (int i = 0; i < n; i++)
+//     {
+//         tsi[i].out();
+//     }
+// }
 int main()
 {
     int n;
@@ -127,6 +128,7 @@ int main()
         tsi[i].out();
     }
     // xapXep(tsi, n);
+
     // xapXep1(tsi, n);
     string s;
     cout << "nhap ten sinh vien can tim: ";
@@ -140,4 +142,7 @@ int main()
     }
     delete[] tsi;
 }
-// phần comment là phần dùng getter để so xắp xếp các thi sinh, còn hàm xapXep() thì dùng hàm friend
+// từ dòng thứ 112 đến dòng thứ 124 là dùng hàm getName() để sắp xếp các phần tử của các thí sinh
+// dong sapXep(tsi,n) (dòng thứ 130) để sắp xếp cac thi sinh theo cách dùng hàm friend
+// muốn chạy 1 trong 2 thì phải comment cái còn lại
+// các cái comment còn lại là dùng để thực hiện hàm sort (cách khác để sắp xếp các thí sinh)
