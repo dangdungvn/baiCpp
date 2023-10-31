@@ -24,12 +24,14 @@ public:
 tamGiac::tamGiac()
 {
     canh1 = canh2 = canh3 = 0;
+    // tamGiac a;
 }
 tamGiac::tamGiac(double canh1, double canh2, double canh3)
 {
     this->canh1 = canh1;
     this->canh2 = canh2;
     this->canh3 = canh3;
+    // tamGiac a(3, 4, 5); 3 4 5
 }
 void tamGiac::nhap()
 {
@@ -52,7 +54,7 @@ double tamGiac::dienTich()
 {
     return sqrt(p() * (p() - canh1) * (p() - canh2) * (p() - canh3));
 }
-void tamGiac::setA(double canh1) // tam giac a co canh 1 la = 2
+void tamGiac::setA(double canh1) // tam giac a co canh1 la = 3            a.setA(3)
 {
     this->canh1 = canh1; // tac giac co canh 1 la 3
 }
@@ -66,7 +68,7 @@ void tamGiac::setC(double canh3)
 }
 double tamGiac::getCanh1()
 {
-    return canh1; // tam giac a canh1 = 3 cout << a.canh1
+    return canh1;
 }
 double tamGiac::getCanh2()
 {
