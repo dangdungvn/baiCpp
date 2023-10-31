@@ -12,6 +12,7 @@ public:
     int tongDiem();
     string getName();
     friend void xapXep(thiSinh svi[], int n);
+    friend void xapXep1(thiSinh svi[], int n);
 };
 void thiSinh::in()
 {
@@ -51,25 +52,34 @@ bool tim(string name, string word)
         x = tolower(x);
     return name.find(word) != string::npos;
 }
-void xapXep(thiSinh svi[], int n)
+void xapXep(thiSinh tsi[], int n)
 {
+
     for (int i = 0; i < n; i++)
     {
-        thiSinh t;
         for (int j = i + 1; j < n; j++)
         {
-            if (svi[i].name < svi[j].name)
+            if (tsi[i].name > tsi[j].name)
             {
-                t = svi[i];
-                svi[i] = svi[j];
-                svi[j] = t;
+                thiSinh t;
+                t = tsi[i];
+                tsi[i] = tsi[j];
+                tsi[j] = t;
             }
         }
     }
     cout << left << setw(20) << "Ma Sinh vien" << setw(30) << "Ten Sinh vien" << setw(10) << "Tong diem" << endl;
     for (int i = 0; i < n; i++)
     {
-        svi[i].out();
+        tsi[i].out();
+    }
+}
+void xapXep1(thiSinh tsi[], int n)
+{
+    sort(tsi, tsi + n, cmp);
+    for (int i = 0; i < n; i++)
+    {
+        tsi[i].out();
     }
 }
 int main()
@@ -83,14 +93,41 @@ int main()
     {
         tsi[i].in();
     }
-    sort(tsi, tsi + n, cmp1);
-    tsi[0].out();
+    thiSinh x = tsi[0];
+    for (int i = 0; i < n; i++)
+    {
+        if (tsi[i].tongDiem() > x.tongDiem())
+        {
+            x = tsi[i];
+        }
+    }
+    cout << "thi sinh co tong diem lon nhat la: ";
+    x.out();
     // sort(tsi, tsi + n, cmp);
     // for (int i = 0; i < n; i++)
     // {
     //     tsi[i].out();
     // }
-    xapXep(tsi, n);
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (tsi[i].getName() > tsi[j].getName())
+            {
+                thiSinh t;
+                t = tsi[i];
+                tsi[i] = tsi[j];
+                tsi[j] = t;
+            }
+        }
+    }
+    cout << left << setw(20) << "Ma Sinh vien" << setw(30) << "Ten Sinh vien" << setw(10) << "Tong diem" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        tsi[i].out();
+    }
+    // xapXep(tsi, n);
+    // xapXep1(tsi, n);
     string s;
     cout << "nhap ten sinh vien can tim: ";
     cin >> s;
