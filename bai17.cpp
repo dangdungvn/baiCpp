@@ -85,6 +85,10 @@ int main()
     {
         cout << "tam giac deu";
     }
+    else if ((a.getCanh1() == a.getCanh2() || a.getCanh1() == a.getCanh3() || a.getCanh2() == a.getCanh3()) && ((a.getCanh1() * a.getCanh1() == a.getCanh2() * a.getCanh2() + a.getCanh3() * a.getCanh3()) || (a.getCanh2() * a.getCanh2() == a.getCanh1() * a.getCanh1() + a.getCanh3() * a.getCanh3()) || (a.getCanh3() * a.getCanh3() == a.getCanh1() * a.getCanh1() + a.getCanh2() * a.getCanh2())))
+    {
+        cout << "tam giac vuong can";
+    }
     else if (a.getCanh1() == a.getCanh2() || a.getCanh1() == a.getCanh3() || a.getCanh2() == a.getCanh3())
     {
         cout << "tam giac can";
