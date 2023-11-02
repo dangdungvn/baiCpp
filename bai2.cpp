@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 class daThuc
 {
@@ -8,82 +9,85 @@ private:
 
 public:
     daThuc();
-    friend void in(daThuc &);
-    friend void out(daThuc);
-    daThuc operator+(daThuc a);
-    daThuc operator-(daThuc a);
-    int getBacDaThuc();
+    daThuc(int bac);
+    void nhap();
+    void xuat();
+    daThuc operator+(daThuc &);
+    daThuc operator-(daThuc &);
 };
-int cmp(daThuc a, daThuc b);
 daThuc::daThuc()
 {
-    this->bacDaThuc = 0;
-    for (int i = 0; i < 100; i++)
+    bacDaThuc = 0;
+}
+daThuc::daThuc(int bac)
+{
+    bacDaThuc = bac;
+    for (int i = bacDaThuc; i >= 0; i--)
     {
-        this->heSo[i] = 0;
+        heSo[i] = 0;
     }
 }
-void in(daThuc &a)
+void daThuc::nhap()
 {
-    cout << "Nhap bac da thuc: ";
-    cin >> a.bacDaThuc;
-    for (int i = 0; i <= a.bacDaThuc; i++)
+    cout << "nhap bac da thuc: ";
+    cin >> bacDaThuc;
+    for (int i = bacDaThuc; i >= 0; i--)
     {
-        cout << "Nhap he so thu " << i + 1 << ": ";
-        cin >> a.heSo[i];
+        cout << "nhap he so cua x^" << i << ": ";
+        cin >> heSo[i];
     }
 }
-int daThuc::getBacDaThuc()
+void daThuc::xuat()
 {
-    return this->bacDaThuc;
+    for (int i = bacDaThuc; i >= 0; i--)
+    {
+        if (i > 1)
+        {
+            cout << heSo[i] << "x^" << i << " + ";
+        }
+        else if (i == 1)
+        {
+            cout << heSo[i] << "x + ";
+        }
+        else
+        {
+            cout << heSo[i];
+        }
+    }
+    cout << endl;
 }
-daThuc daThuc::operator+(daThuc a)
+daThuc daThuc::operator+(daThuc &a)
 {
-    daThuc sum;
-    sum.bacDaThuc = cmp(*this, a);
-    for (int i = sum.bacDaThuc; i >= 0; i--)
+    int maxBac = max(this->bacDaThuc, a.bacDaThuc);
+    daThuc temp(maxBac);
+    for (int i = 0; i <= temp.bacDaThuc; i++)
     {
-        sum.heSo[i] = this->heSo[i] + a.heSo[i];
+        temp.heSo[i] = this->heSo[i] + a.heSo[i];
     }
-    return sum;
+    return temp;
 }
-daThuc daThuc::operator-(daThuc a)
+daThuc daThuc::operator-(daThuc &a)
 {
-    daThuc sub;
-    sub.bacDaThuc = cmp(*this, a);
-    for (int i = sub.bacDaThuc; i >= 0; i--)
+    int maxBac = max(this->bacDaThuc, a.bacDaThuc);
+    daThuc temp(maxBac);
+    for (int i = 0; i <= temp.bacDaThuc; i++)
     {
-        sub.heSo[i] = this->heSo[i] - a.heSo[i];
+        temp.heSo[i] = this->heSo[i] - a.heSo[i];
     }
-    return sub;
-}
-void out(daThuc a)
-{
-    for (int i = 0; i < a.bacDaThuc; i++)
-    {
-        cout << a.heSo[i] << "x^" << a.bacDaThuc - i << " + ";
-    }
-    cout << a.heSo[a.bacDaThuc] << " = 0" << endl;
-}
-int cmp(daThuc a, daThuc b)
-{
-    if (a.getBacDaThuc() >= b.getBacDaThuc())
-    {
-        return a.getBacDaThuc();
-    }
-    else
-    {
-        return b.getBacDaThuc();
-    }
+    return temp;
 }
 int main()
 {
-    daThuc a, b;
-    in(a);
-    in(b);
-    daThuc sum = a + b;
-    daThuc sub = a - b;
-    out(sum);
-    out(sub);
+    daThuc a, b, c;
+    cout << "nhap da thuc a: ";
+    a.nhap();
+    cout << "nhap da thuc b: ";
+    b.nhap();
+    c = a + b;
+    cout << "da thuc c = a + b: ";
+    c.xuat();
+    cout << "da thuc c = a - b: ";
+    c = a - b;
+    c.xuat();
     return 0;
 }

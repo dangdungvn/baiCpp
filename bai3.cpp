@@ -10,8 +10,10 @@ public:
     Date();
     Date(int day, int month, int year);
     ~Date();
-    friend istream &operator>>(istream &in, Date &a);
-    friend ostream &operator<<(ostream &out, Date a);
+    // friend istream &operator>>(istream &in, Date &a);
+    // friend ostream &operator<<(ostream &out, Date a);
+    void nhap();
+    void xuat();
     Date &operator++();
     Date operator++(int);
     Date &operator--();
@@ -32,34 +34,49 @@ Date::~Date()
 {
     day = month = year = 0;
 }
-
-istream &operator>>(istream &in, Date &a)
+void Date::nhap()
 {
-    in >> a.day >> a.month >> a.year;
-    return in;
+    cout << "nhap ngay: ";
+    cin >> day;
+    cout << "nhap thang: ";
+    cin >> month;
+    cout << "nhap nam: ";
+    cin >> year;
 }
-ostream &operator<<(ostream &out, Date a)
+void Date::xuat()
 {
-
-    if (a.day < 10 && a.month < 10)
+    if (day < 10)
     {
-        out << "0" << a.day << "/"
-            << "0" << a.month << "/" << a.year;
-    }
-    else if (a.day < 10)
-    {
-        out << "0" << a.day << "/" << a.month << "/" << a.year;
-    }
-    else if (a.month < 10)
-    {
-        out << a.day << "/"
-            << "0" << a.month << "/" << a.year;
+        cout << "0" << day << "/";
     }
     else
     {
-        out << a.day << "/" << a.month << "/" << a.year;
+        cout << day << "/";
     }
-    return out;
+    if (month < 10)
+    {
+        cout << "0" << month << "/";
+    }
+    else
+    {
+        cout << month << "/";
+    }
+    if (year < 10 && year >= 0)
+    {
+        cout << "000" << year;
+    }
+    else if (year < 100 && year >= 10)
+    {
+        cout << "00" << year;
+    }
+    else if (year < 1000 && year >= 100)
+    {
+        cout << "0" << year;
+    }
+    else
+    {
+        cout << year;
+    }
 }
 
 Date &Date::operator++()
@@ -149,8 +166,8 @@ int Date::getDayInMonth()
 int main()
 {
     Date a;
-    cin >> a;
+    a.nhap();
     a++;
-    cout << a;
+    a.xuat();
     return 0;
 }
