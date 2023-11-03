@@ -63,19 +63,19 @@ void Date::xuat()
     }
     if (year < 10 && year >= 0)
     {
-        cout << "000" << year;
+        cout << "000" << year << endl;
     }
     else if (year < 100 && year >= 10)
     {
-        cout << "00" << year;
+        cout << "00" << year << endl;
     }
     else if (year < 1000 && year >= 100)
     {
-        cout << "0" << year;
+        cout << "0" << year << endl;
     }
     else
     {
-        cout << year;
+        cout << year << endl;
     }
 }
 
