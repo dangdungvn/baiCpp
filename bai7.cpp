@@ -13,6 +13,7 @@ public:
     int tongDCC();
     int tongDCP();
 };
+
 void MTV::nhap()
 {
     cout << "nhap cap ma tran vuong: ";
