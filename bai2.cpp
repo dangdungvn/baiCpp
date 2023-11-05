@@ -60,9 +60,13 @@ daThuc daThuc::operator+(daThuc &a)
 {
     int maxBac = max(this->bacDaThuc, a.bacDaThuc);
     daThuc temp(maxBac);
-    for (int i = 0; i <= temp.bacDaThuc; i++)
+    for (int i = 0; i <= this->bacDaThuc; i++)
     {
-        temp.heSo[i] = this->heSo[i] + a.heSo[i];
+        temp.heSo[i] += heSo[i];
+    }
+    for (int i = 0; i <= a.bacDaThuc; i++)
+    {
+        temp.heSo[i] += a.heSo[i];
     }
     return temp;
 }
@@ -70,18 +74,22 @@ daThuc daThuc::operator-(daThuc &a)
 {
     int maxBac = max(this->bacDaThuc, a.bacDaThuc);
     daThuc temp(maxBac);
-    for (int i = 0; i <= temp.bacDaThuc; i++)
+    for (int i = 0; i <= this->bacDaThuc; i++)
     {
-        temp.heSo[i] = this->heSo[i] - a.heSo[i];
+        temp.heSo[i] += heSo[i];
+    }
+    for (int i = 0; i <= a.bacDaThuc; i++)
+    {
+        temp.heSo[i] -= a.heSo[i];
     }
     return temp;
 }
 int main()
 {
     daThuc a, b, c;
-    cout << "nhap da thuc a: ";
+    cout << "nhap da thuc a: " << endl;
     a.nhap();
-    cout << "nhap da thuc b: ";
+    cout << "nhap da thuc b: " << endl;
     b.nhap();
     c = a + b;
     cout << "da thuc c = a + b: ";
