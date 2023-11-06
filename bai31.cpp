@@ -34,6 +34,10 @@ void sinhVien::xuat()
 {
     cout << left << setw(15) << maSV << setw(30) << hoTen << setw(15) << namSinh << setw(5) << gpa << endl;
 }
+double sinhVien::getGpa()
+{
+    return this->gpa;
+}
 bool cmp(sinhVien a, sinhVien b)
 {
     return a.getGpa() > b.getGpa();
@@ -47,24 +51,6 @@ int main()
     for (int i = 0; i < n; i++)
     {
         a[i].nhap();
-    }
-    for (int i = 0; i < n; i++)
-    {
-        if (a[i].getGpa() >= 8.0)
-        {
-            cout << "cac sinh vien gioi la: " << endl;
-            a[i].xuat();
-        }
-        else if (a[i].getGpa() >= 6.5 && a[i].getGpa() < 8.0)
-        {
-            cout << "cac sinh vien kha la: " << endl;
-            a[i].xuat();
-        }
-        else
-        {
-            cout << "cac sinh vien trung binh la: " << endl;
-            a[i].xuat();
-        }
     }
     sort(a.begin(), a.end(), cmp);
     cout << "cac sinh vien co GPA giam dan la: " << endl;
