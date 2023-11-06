@@ -135,8 +135,11 @@ int main()
     {
         if (tsi[i].getName().find(s) != string::npos)
         {
+            cout << "thong tin sinh vien can tim: ";
             tsi[i].xuat();
         }
     }
     delete[] tsi;
 }
+// trong hàm sapXep(): ta cho i chạy từ phần tử 0 đến phần tử n-2, j chạy từ phần tử 1 đến phần n-1, khi mà phần tử thứ i lớn hơn phần tử thứ j
+// thì chúng ta sẽ swap 2 phần tử đó với nhau để luôn bảo đảm phần tử đứng trước nhỏ hơn phần tử phía sau, sau khi swap thì ta lại chạy lại vòng for
