@@ -4,17 +4,17 @@ class thiSinh
 {
 private:
     string mts, name;
-    int dt, dl, dh;
+    double dt, dl, dh;
 
 public:
-    void in();
-    void out();
-    int tongDiem();
+    void nhap();
+    void xuat();
+    double tongDiem();
     string getName();
     friend void xapXep(thiSinh svi[], int n);
     friend void xapXep1(thiSinh svi[], int n);
 };
-void thiSinh::in()
+void thiSinh::nhap()
 {
     cout << "nhap ma thi sinh: ";
     cin >> mts;
@@ -24,11 +24,11 @@ void thiSinh::in()
     cout << "nhap diem thi sinh: ";
     cin >> dt >> dl >> dh;
 }
-int thiSinh::tongDiem()
+double thiSinh::tongDiem()
 {
     return dt + dl + dh;
 }
-void thiSinh::out()
+void thiSinh::xuat()
 {
     cout << left << setw(20) << mts << setw(30) << name << setw(10) << tongDiem() << endl;
 }
@@ -36,23 +36,7 @@ string thiSinh::getName()
 {
     return this->name;
 }
-// bool cmp(thiSinh a, thiSinh b)
-// {
-//     return a.getName() < b.getName();
-// }
 
-// bool cmp1(thiSinh a, thiSinh b)
-// {
-//     return a.tongDiem() > b.tongDiem();
-// }
-bool tim(string name, string word)
-{
-    for (char &x : name)
-        x = tolower(x);
-    for (char &x : word)
-        x = tolower(x);
-    return name.find(word) != string::npos;
-}
 void xapXep(thiSinh tsi[], int n)
 {
 
@@ -72,15 +56,25 @@ void xapXep(thiSinh tsi[], int n)
     cout << left << setw(20) << "Ma Sinh vien" << setw(30) << "Ten Sinh vien" << setw(10) << "Tong diem" << endl;
     for (int i = 0; i < n; i++)
     {
-        tsi[i].out();
+        tsi[i].xuat();
     }
 }
+// bool cmp(thiSinh a, thiSinh b)
+// {
+//     return a.getName() < b.getName();
+// }
+
+// bool cmp1(thiSinh a, thiSinh b)
+// {
+//     return a.tongDiem() > b.tongDiem();
+// }
+
 // void xapXep1(thiSinh tsi[], int n)
 // {
 //     sort(tsi, tsi + n, cmp);
 //     for (int i = 0; i < n; i++)
 //     {
-//         tsi[i].out();
+//         tsi[i].xuat();
 //     }
 // }
 int main()
@@ -92,7 +86,7 @@ int main()
     tsi = new thiSinh[n];
     for (int i = 0; i < n; i++)
     {
-        tsi[i].in();
+        tsi[i].nhap();
     }
     thiSinh x = tsi[0];
     for (int i = 0; i < n; i++)
@@ -103,11 +97,13 @@ int main()
         }
     }
     cout << "thi sinh co tong diem lon nhat la: ";
-    x.out();
+    x.xuat();
+
     // sort(tsi, tsi + n, cmp);
+
     // for (int i = 0; i < n; i++)
     // {
-    //     tsi[i].out();
+    //     tsi[i].xuat();
     // }
     // for (int i = 0; i < n; i++)
     // {
@@ -122,11 +118,13 @@ int main()
     //         }
     //     }
     // }
+
     // cout << left << setw(20) << "Ma Sinh vien" << setw(30) << "Ten Sinh vien" << setw(10) << "Tong diem" << endl;
     // for (int i = 0; i < n; i++)
     // {
-    //     tsi[i].out();
+    //     tsi[i].xuat();
     // }
+
     xapXep(tsi, n);
 
     // xapXep1(tsi, n);
@@ -135,14 +133,10 @@ int main()
     cin >> s;
     for (int i = 0; i < n; i++)
     {
-        if (tim(tsi[i].getName(), s))
+        if (tsi[i].getName().find(s) != string::npos)
         {
-            tsi[i].out();
+            tsi[i].xuat();
         }
     }
     delete[] tsi;
 }
-// từ dòng thứ 112 đến dòng thứ 124 là dùng hàm getName() để sắp xếp các phần tử của các thí sinh
-// dong sapXep(tsi,n) (dòng thứ 130) để sắp xếp cac thi sinh theo cách dùng hàm friend
-// muốn chạy 1 trong 2 thì phải comment cái còn lại
-// các cái comment còn lại là dùng để thực hiện hàm sort (cách khác để sắp xếp các thí sinh)
