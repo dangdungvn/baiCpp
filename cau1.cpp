@@ -109,25 +109,25 @@ int main()
     // {
     //     tsi[i].out();
     // }
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (tsi[i].getName() > tsi[j].getName())
-            {
-                thiSinh t;
-                t = tsi[i];
-                tsi[i] = tsi[j];
-                tsi[j] = t;
-            }
-        }
-    }
-    cout << left << setw(20) << "Ma Sinh vien" << setw(30) << "Ten Sinh vien" << setw(10) << "Tong diem" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        tsi[i].out();
-    }
-    // xapXep(tsi, n);
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = i + 1; j < n; j++)
+    //     {
+    //         if (tsi[i].getName() > tsi[j].getName())
+    //         {
+    //             thiSinh t;
+    //             t = tsi[i];
+    //             tsi[i] = tsi[j];
+    //             tsi[j] = t;
+    //         }
+    //     }
+    // }
+    // cout << left << setw(20) << "Ma Sinh vien" << setw(30) << "Ten Sinh vien" << setw(10) << "Tong diem" << endl;
+    // for (int i = 0; i < n; i++)
+    // {
+    //     tsi[i].out();
+    // }
+    xapXep(tsi, n);
 
     // xapXep1(tsi, n);
     string s;
