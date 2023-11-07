@@ -49,6 +49,8 @@ public:
     bool operator>(ps a);
     friend bool cmp(ps a, ps b);
     bool cmp1(ps a);
+    int getTu();
+    int getMau();
 };
 void ps::toiGian()
 {
@@ -90,17 +92,29 @@ ps ps::operator-(ps a)
     temp.toiGian();
     return temp;
 }
+
 bool ps::operator>(ps a)
 {
     return tu * a.mau > a.tu * mau;
 }
+
 bool cmp(ps a, ps b)
 {
     return a.tu * b.mau > a.mau * b.tu;
 }
+
 bool ps::cmp1(ps a)
 {
     return tu * a.mau > mau * a.tu;
+}
+
+int ps::getTu()
+{
+    return tu;
+}
+int ps::getMau()
+{
+    return mau;
 }
 int main()
 {
@@ -120,6 +134,7 @@ int main()
         if (a[i] > temp)
         // if(a[i].cmp1(temp))
         // if(cmp(a[i], temp))
+        // if(a[i].getTu() * temp.getMau() > a[i].getMau() * temp.getTu())
         {
             temp = a[i];
         }
