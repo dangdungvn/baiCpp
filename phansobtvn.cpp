@@ -5,16 +5,16 @@
 #include <bits/stdc++.h>
 #include <algorithm>
 using namespace std;
-// int lcm(int a, int b)
+// int gcd(int a, int b)
 // {
 //     if (b == 0)
 //     {
 //         return a;
 //     }
-//     return lcm(b, a % b);
+//     return gcd(b, a % b);
 // }
 
-int lcm(int a, int b)
+int gcd(int a, int b)
 {
     int minx;
     if (a <= b)
@@ -54,7 +54,7 @@ public:
 };
 void ps::toiGian()
 {
-    int ucln = lcm(tu, mau);
+    int ucln = gcd(tu, mau);
     tu /= ucln;
     mau /= ucln;
 }
