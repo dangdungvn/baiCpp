@@ -112,10 +112,12 @@ int ps::getTu()
 {
     return tu;
 }
+
 int ps::getMau()
 {
     return mau;
 }
+
 int main()
 {
     int n;
