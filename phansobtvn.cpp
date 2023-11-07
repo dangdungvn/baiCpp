@@ -48,11 +48,8 @@ public:
     void toiGian();
     bool operator>(ps a);
     friend bool cmp(ps a, ps b);
+    bool cmp1(ps a);
 };
-bool cmp(ps a, ps b)
-{
-    return a.tu * b.mau > a.mau * b.tu;
-}
 void ps::toiGian()
 {
     int ucln = lcm(tu, mau);
@@ -97,6 +94,14 @@ bool ps::operator>(ps a)
 {
     return tu * a.mau > a.tu * mau;
 }
+bool cmp(ps a, ps b)
+{
+    return a.tu * b.mau > a.mau * b.tu;
+}
+bool ps::cmp1(ps a)
+{
+    return tu * a.mau > mau * a.tu;
+}
 int main()
 {
     int n;
@@ -113,6 +118,8 @@ int main()
     for (int i = 0; i < n; i++)
     {
         if (a[i] > temp)
+        // if(a[i].cmp1(temp))
+        // if(cmp(a[i], temp))
         {
             temp = a[i];
         }
