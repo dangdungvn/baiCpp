@@ -144,6 +144,4 @@ int main()
     cout << "phan so lon nhat la: ";
     cout << temp << endl;
     return 0;
-    ps sum = a[0] + a[1];
-    cout << sum;
 }
