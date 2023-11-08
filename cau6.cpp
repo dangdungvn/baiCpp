@@ -5,22 +5,35 @@ class daThuc
 {
 private:
     int bacDaThuc;
-    vector<int> heSo;
+    int heSo[100];
 
 public:
+    daThuc();
+    daThuc(int bac);
     void nhap();
     void xuat();
-    daThuc cong2DT(daThuc &a);
-    daThuc tru2DT(daThuc &a);
+    daThuc operator+(daThuc &);
+    daThuc operator-(daThuc &);
 };
+daThuc::daThuc()
+{
+    bacDaThuc = 0;
+}
+daThuc::daThuc(int bac)
+{
+    bacDaThuc = bac;
+    for (int i = bacDaThuc; i >= 0; i--)
+    {
+        heSo[i] = 0;
+    }
+}
 void daThuc::nhap()
 {
     cout << "nhap bac da thuc: ";
     cin >> bacDaThuc;
-    heSo.resize(bacDaThuc + 1);
     for (int i = bacDaThuc; i >= 0; i--)
     {
-        cout << "nhap he so thu " << i << ": ";
+        cout << "nhap he so cua x^" << i << ": ";
         cin >> heSo[i];
     }
 }
@@ -28,18 +41,61 @@ void daThuc::xuat()
 {
     for (int i = bacDaThuc; i >= 0; i--)
     {
-        cout << heSo[i] << "x^" << i << " + ";
+        if (i > 1)
+        {
+            cout << heSo[i] << "x^" << i << " + ";
+        }
+        else if (i == 1)
+        {
+            cout << heSo[i] << "x + ";
+        }
+        else
+        {
+            cout << heSo[i];
+        }
     }
     cout << endl;
 }
-daThuc daThuc::cong2DT(daThuc &a)
+daThuc daThuc::operator+(daThuc &a)
 {
-    daThuc sum;
-    sum.bacDaThuc = max(this->bacDaThuc, a.bacDaThuc);
-    for (int i = 0; i <= sum.bacDaThuc; i++)
+    int maxBac = max(this->bacDaThuc, a.bacDaThuc);
+    daThuc temp(maxBac);
+    for (int i = 0; i <= this->bacDaThuc; i++)
     {
-        sum.heSo[i] = this->heSo[i] + a.heSo[i];
+        temp.heSo[i] += heSo[i];
     }
-    return sum;
+    for (int i = 0; i <= a.bacDaThuc; i++)
+    {
+        temp.heSo[i] += a.heSo[i];
+    }
+    return temp;
 }
-// chưa xong :v
+daThuc daThuc::operator-(daThuc &a)
+{
+    int maxBac = max(this->bacDaThuc, a.bacDaThuc);
+    daThuc temp(maxBac);
+    for (int i = 0; i <= this->bacDaThuc; i++)
+    {
+        temp.heSo[i] += heSo[i];
+    }
+    for (int i = 0; i <= a.bacDaThuc; i++)
+    {
+        temp.heSo[i] -= a.heSo[i];
+    }
+    return temp;
+}
+int main()
+{
+    daThuc a, b, c;
+    cout << "nhap da thuc a: " << endl;
+    a.nhap();
+    cout << "nhap da thuc b: " << endl;
+    b.nhap();
+    c = a + b;
+    cout << "da thuc c = a + b: ";
+    c.xuat();
+    cout << "da thuc c = a - b: ";
+    c = a - b;
+    c.xuat();
+    return 0;
+}
