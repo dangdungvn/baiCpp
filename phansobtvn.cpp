@@ -47,18 +47,18 @@ public:
     ps operator-(ps a);
     void toiGian();
     bool operator>(ps a);
-    ps &operator=(const ps &a);
+    // ps &operator=(const ps &a);
     friend bool cmp(ps a, ps b);
     bool cmp1(ps a);
     int getTu();
     int getMau();
 };
-ps &ps::operator=(const ps &a)
-{
-    tu = a.tu;
-    mau = a.mau;
-    return *this;
-}
+// ps &ps::operator=(const ps &a)
+// {
+//     tu = a.tu;
+//     mau = a.mau;
+//     return *this;
+// }
 void ps::toiGian()
 {
     int ucln = gcd(tu, mau);
