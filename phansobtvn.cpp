@@ -2,6 +2,9 @@
 //(có thể dùng cách khác để tìm ucln của 2 số, hoặc định nghĩa luôn ở trong hàm tối giản)
 // khai báo và định nghĩa toán tử > (chú ý là toán tử này có kiểu trả về là bool (boolean))
 // so sánh và tìm ra phân số lớn nhất giống như bài trước
+/*tạo 1 class phân số
+định nghĩa các toán tử nhập, xuất, cộng trừ để cộng trừ 2 phân số
+tạo 1 mảng các phân số, tìm phân số lớn nhất trong mảng*/
 #include <bits/stdc++.h>
 #include <algorithm>
 using namespace std;
