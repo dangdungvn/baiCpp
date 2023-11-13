@@ -4,7 +4,8 @@ using namespace std;
 class diem
 {
 private:
-    int toaDoX, toaDoY;
+    int toaDoX;
+    int toaDoY;
 
 public:
     void nhap();
@@ -20,9 +21,12 @@ private:
 public:
     void nhap();
     void xuat();
+    friend double doDai(diem a, diem b);
+    void kiemTra();
     double getCanh1();
     double getCanh2();
     double getCanh3();
+    friend void kiemTra(tamGiac a);
 };
 void diem::nhap()
 {
@@ -41,14 +45,11 @@ void diem::xuat()
 }
 void tamGiac::nhap()
 {
-    cout << "nhap dinh thu nhat cua tam giac: ";
-    cout << endl;
+    cout << "nhap dinh thu nhat cua tam giac: " << endl;
     a.nhap();
-    cout << "nhap dinh thu hai cua tam giac: ";
-    cout << endl;
+    cout << "nhap dinh thu hai cua tam giac: " << endl;
     b.nhap();
-    cout << "nhap dinh thu ba cua tam giac: ";
-    cout << endl;
+    cout << "nhap dinh thu ba cua tam giac: " << endl;
     c.nhap();
     canh1 = khoangCach(a, b);
     canh2 = khoangCach(b, c);
@@ -56,49 +57,114 @@ void tamGiac::nhap()
 }
 void tamGiac::xuat()
 {
-    cout << "dinh thu nhat cua tam giac: ";
-    a.xuat();
-    cout << endl;
-    cout << "dinh thu hai cua tam giac: ";
-    b.xuat();
-    cout << endl;
-    cout << "dinh thu ba cua tam giac: ";
-    c.xuat();
+    cout << "canh thu nhat cua tam giac: " << canh1 << endl;
+    cout << "canh thu hai cua tam giac: " << canh2 << endl;
+    cout << "canh thu ba cua tam giac: " << canh3 << endl;
 }
-double tamGiac::getCanh1()
+// void tamGiac::kiemTra()
+// {
+//     if (canh1 + canh2 <= canh3 || canh1 + canh3 <= canh2 || canh2 + canh3 <= canh1)
+//     {
+//         cout << "tam giac khong hop le" << endl;
+//     }
+//     else
+//     {
+//         if (canh1 == canh2 && canh2 == canh3)
+//         {
+//             cout << "tam giac deu" << endl;
+//         }
+//         else if ((canh1 == canh2 || canh1 == canh3 || canh2 == canh3) && (canh1 * canh1 + canh2 * canh2 == canh3 * canh3 || canh1 * canh1 + canh3 * canh3 == canh2 * canh2 || canh2 * canh2 + canh3 * canh3 == canh1 * canh1))
+//         {
+//             cout << "tam giac vuong can" << endl;
+//         }
+//         else if (canh1 * canh1 + canh2 * canh2 == canh3 * canh3 || canh1 * canh1 + canh3 * canh3 == canh2 * canh2 || canh2 * canh2 + canh3 * canh3 == canh1 * canh1)
+//         {
+//             cout << "tam giac vuong" << endl;
+//         }
+//         else if (canh1 == canh2 || canh1 == canh3 || canh2 == canh3)
+//         {
+//             cout << "tam giac can" << endl;
+//         }
+//         else
+//         {
+//             cout << "tam giac thuong" << endl;
+//         }
+//     }
+// }
+void kiemTra(tamGiac a)
 {
-    return canh1;
-}
-double tamGiac::getCanh2()
-{
-    return canh2;
-}
-double tamGiac::getCanh3()
-{
-    return canh3;
-}
-int main()
-{
-    tamGiac a;
-    a.nhap();
-    if (a.getCanh1() == a.getCanh2() && a.getCanh1() == a.getCanh3())
+    if (a.canh1 + a.canh2 <= a.canh3 || a.canh1 + a.canh3 <= a.canh2 || a.canh2 + a.canh3 <= a.canh1)
     {
-        cout << "tam giac deu";
-    }
-    else if ((a.getCanh1() == a.getCanh2() || a.getCanh1() == a.getCanh3() || a.getCanh2() == a.getCanh3()) && ((a.getCanh1() * a.getCanh1() == a.getCanh2() * a.getCanh2() + a.getCanh3() * a.getCanh3()) || (a.getCanh2() * a.getCanh2() == a.getCanh1() * a.getCanh1() + a.getCanh3() * a.getCanh3()) || (a.getCanh3() * a.getCanh3() == a.getCanh1() * a.getCanh1() + a.getCanh2() * a.getCanh2())))
-    {
-        cout << "tam giac vuong can";
-    }
-    else if (a.getCanh1() == a.getCanh2() || a.getCanh1() == a.getCanh3() || a.getCanh2() == a.getCanh3())
-    {
-        cout << "tam giac can";
-    }
-    else if ((a.getCanh1() * a.getCanh1() == a.getCanh2() * a.getCanh2() + a.getCanh3() * a.getCanh3()) || (a.getCanh2() * a.getCanh2() == a.getCanh1() * a.getCanh1() + a.getCanh3() * a.getCanh3()) || (a.getCanh3() * a.getCanh3() == a.getCanh1() * a.getCanh1() + a.getCanh2() * a.getCanh2()))
-    {
-        cout << "tam giac vuong";
+        cout << "tam giac khong hop le" << endl;
     }
     else
     {
-        cout << "tam giac thuong";
+        if (a.canh1 == a.canh2 && a.canh2 == a.canh3)
+        {
+            cout << "tam giac deu" << endl;
+        }
+        else if ((a.canh1 == a.canh2 || a.canh1 == a.canh3 || a.canh2 == a.canh3) && (a.canh1 * a.canh1 + a.canh2 * a.canh2 == a.canh3 * a.canh3 || a.canh1 * a.canh1 + a.canh3 * a.canh3 == a.canh2 * a.canh2 || a.canh2 * a.canh2 + a.canh3 * a.canh3 == a.canh1 * a.canh1))
+        {
+            cout << "tam giac vuong can" << endl;
+        }
+        else if (a.canh1 * a.canh1 + a.canh2 * a.canh2 == a.canh3 * a.canh3 || a.canh1 * a.canh1 + a.canh3 * a.canh3 == a.canh2 * a.canh2 || a.canh2 * a.canh2 + a.canh3 * a.canh3 == a.canh1 * a.canh1)
+        {
+            cout << "tam giac vuong" << endl;
+        }
+        else if (a.canh1 == a.canh2 || a.canh1 == a.canh3 || a.canh2 == a.canh3)
+        {
+            cout << "tam giac can" << endl;
+        }
+        else
+        {
+            cout << "tam giac thuong" << endl;
+        }
     }
+}
+// double tamGiac::getCanh1()
+// {
+//     return canh1;
+// }
+// double tamGiac::getCanh2()
+// {
+//     return canh2;
+// }
+// double tamGiac::getCanh3()
+// {
+//     return canh3;
+// }
+int main()
+{
+    tamGiac tg;
+    tg.nhap();
+    tg.xuat();
+    // tg.kiemTra();
+    kiemTra(tg);
+    // if (tg.getCanh1() + tg.getCanh2() <= tg.getCanh3() || tg.getCanh1() + tg.getCanh3() <= tg.getCanh2() || tg.getCanh2() + tg.getCanh3() <= tg.getCanh1())
+    // {
+    //     cout << "tam giac khong hop le" << endl;
+    // }
+    // else
+    // {
+    //     if (tg.getCanh1() == tg.getCanh2() && tg.getCanh2() == tg.getCanh3())
+    //     {
+    //         cout << "tam giac deu" << endl;
+    //     }
+    //     else if ((tg.getCanh1() == tg.getCanh2() || tg.getCanh1() == tg.getCanh3() || tg.getCanh2() == tg.getCanh3()) && (tg.getCanh1() * tg.getCanh1() + tg.getCanh2() * tg.getCanh2() == tg.getCanh3() * tg.getCanh3() || tg.getCanh1() * tg.getCanh1() + tg.getCanh3() * tg.getCanh3() == tg.getCanh2() * tg.getCanh2() || tg.getCanh2() * tg.getCanh2() + tg.getCanh3() * tg.getCanh3() == tg.getCanh1() * tg.getCanh1()))
+    //     {
+    //         cout << "tam giac vuong can" << endl;
+    //     }
+    //     else if (tg.getCanh1() * tg.getCanh1() + tg.getCanh2() * tg.getCanh2() == tg.getCanh3() * tg.getCanh3() || tg.getCanh1() * tg.getCanh1() + tg.getCanh3() * tg.getCanh3() == tg.getCanh2() * tg.getCanh2() || tg.getCanh2() * tg.getCanh2() + tg.getCanh3() * tg.getCanh3() == tg.getCanh1() * tg.getCanh1())
+    //     {
+    //         cout << "tam giac vuong" << endl;
+    //     }
+    //     else if (tg.getCanh1() == tg.getCanh2() || tg.getCanh1() == tg.getCanh3() || tg.getCanh2() == tg.getCanh3())
+    //     {
+    //         cout << "tam giac can" << endl;
+    //     }
+    //     else
+    //     {
+    //         cout << "tam giac thuong" << endl;
+    //     }
+    // }
 }

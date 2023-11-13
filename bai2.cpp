@@ -14,8 +14,8 @@ public:
     // void xuat();
     friend istream &operator>>(istream &, daThuc &);
     friend ostream &operator<<(ostream &, daThuc);
-    daThuc operator+(daThuc &);
-    daThuc operator-(daThuc &);
+    daThuc operator+(daThuc);
+    daThuc operator-(daThuc);
 };
 daThuc::daThuc()
 {
@@ -89,7 +89,7 @@ ostream &operator<<(ostream &out, daThuc a)
 //     }
 //     cout << endl;
 // }
-daThuc daThuc::operator+(daThuc &a)
+daThuc daThuc::operator+(daThuc a)
 {
     int maxBac = max(this->bacDaThuc, a.bacDaThuc);
     daThuc temp(maxBac);
@@ -103,7 +103,7 @@ daThuc daThuc::operator+(daThuc &a)
     }
     return temp;
 }
-daThuc daThuc::operator-(daThuc &a)
+daThuc daThuc::operator-(daThuc a)
 {
     int maxBac = max(this->bacDaThuc, a.bacDaThuc);
     daThuc temp(maxBac);
