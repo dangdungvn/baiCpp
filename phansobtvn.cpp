@@ -16,7 +16,6 @@ using namespace std;
 //     }
 //     return gcd(b, a % b);
 // }
-
 int gcd(int a, int b)
 {
     int minx;
