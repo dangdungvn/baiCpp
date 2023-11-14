@@ -4,14 +4,14 @@ using namespace std;
 class nguoi
 {
 protected:
-    string name;
-    string date;
+    string hoTen, namSinh;
 
 public:
     nguoi();
+    nguoi(string hoTen, string namSinh);
     void nhap();
     void xuat();
-    string getName();
+    string getHoTen();
 };
 class Sv : public nguoi
 {
@@ -21,35 +21,46 @@ private:
 
 public:
     Sv();
+    Sv(string hoTen, string namSinh, string maSV, double gpa);
     void nhap();
     void xuat();
     string getMaSV();
 };
 nguoi::nguoi()
 {
-    name = "";
-    date = "";
+    hoTen = "";
+    namSinh = "";
+}
+nguoi::nguoi(string hoTen, string namSinh)
+{
+    this->hoTen = hoTen;
+    this->namSinh = namSinh;
 }
 void nguoi::nhap()
 {
     cout << "nhap ten sinh vien: ";
     cin.ignore();
-    getline(cin, name);
+    getline(cin, hoTen);
     cout << "nhap ngay sinh: ";
-    cin >> date;
+    cin >> namSinh;
 }
 void nguoi::xuat()
 {
-    cout << name << " " << date << " ";
+    cout << left << setw(20) << hoTen << setw(10) << namSinh << endl;
 }
-string nguoi::getName()
+string nguoi::getHoTen()
 {
-    return this->name;
+    return this->hoTen;
 }
-Sv ::Sv()
+Sv ::Sv() : nguoi()
 {
     maSV = "";
     gpa = 0;
+}
+Sv ::Sv(string hoTen, string namSinh, string maSV, double gpa) : nguoi(hoTen, namSinh)
+{
+    this->maSV = maSV;
+    this->gpa = gpa;
 }
 void Sv::nhap()
 {
@@ -62,7 +73,7 @@ void Sv::nhap()
 void Sv::xuat()
 {
     nguoi::xuat();
-    cout << maSV << " " << gpa << endl;
+    cout << left << setw(10) << maSV << setw(5) << gpa << endl;
 }
 string Sv::getMaSV()
 {
@@ -83,9 +94,10 @@ int main()
     cout << "nhap thong tin sinh vien can tim: ";
     cin.ignore();
     getline(cin, s);
+    cout << left << setw(20) << "ho ten" << setw(10) << "nam sinh" << setw(10) << "ma sv" << setw(5) << "gpa" << endl;
     for (int i = 0; i < n; i++)
     {
-        if ((a[i].getName().find(s) != string::npos) || (a[i].getMaSV().find(s) != string::npos))
+        if ((a[i].getHoTen().find(s) != string::npos) || (a[i].getMaSV().find(s) != string::npos))
         {
             cout << "thong tin sinh vien can tim: ";
             a[i].xuat();
