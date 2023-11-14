@@ -9,8 +9,8 @@ protected:
 
 public:
     nguoi();
-    void in();
-    void out();
+    void nhap();
+    void xuat();
     string getName();
 };
 class Sv : public nguoi
@@ -21,8 +21,8 @@ private:
 
 public:
     Sv();
-    void in();
-    void out();
+    void nhap();
+    void xuat();
     string getMaSV();
 };
 nguoi::nguoi()
@@ -30,7 +30,7 @@ nguoi::nguoi()
     name = "";
     date = "";
 }
-void nguoi::in()
+void nguoi::nhap()
 {
     cout << "nhap ten sinh vien: ";
     cin.ignore();
@@ -38,7 +38,7 @@ void nguoi::in()
     cout << "nhap ngay sinh: ";
     cin >> date;
 }
-void nguoi::out()
+void nguoi::xuat()
 {
     cout << name << " " << date << " ";
 }
@@ -51,17 +51,17 @@ Sv ::Sv()
     maSV = "";
     gpa = 0;
 }
-void Sv::in()
+void Sv::nhap()
 {
-    nguoi::in();
+    nguoi::nhap();
     cout << "nhap ma sinh vien: ";
     cin >> maSV;
     cout << "nhap diem tb: ";
     cin >> gpa;
 }
-void Sv::out()
+void Sv::xuat()
 {
-    nguoi::out();
+    nguoi::xuat();
     cout << maSV << " " << gpa << endl;
 }
 string Sv::getMaSV()
@@ -77,7 +77,7 @@ int main()
     for (int i = 0; i < n; i++)
     {
         cout << "nhap sinh vien thu " << i << ":" << endl;
-        a[i].in();
+        a[i].nhap();
     }
     string s;
     cout << "nhap thong tin sinh vien can tim: ";
@@ -88,7 +88,7 @@ int main()
         if (a[i].getName().find(s) != string::npos)
         {
             cout << "thong tin sinh vien can tim: ";
-            a[i].out();
+            a[i].xuat();
         }
         else
         {
@@ -100,7 +100,7 @@ int main()
         if (a[i].getMaSV().find(s) != string::npos)
         {
             cout << "thong tin sinh vien can tim: ";
-            a[i].out();
+            a[i].xuat();
         }
         else
         {
