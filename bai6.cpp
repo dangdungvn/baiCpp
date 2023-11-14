@@ -85,7 +85,7 @@ int main()
     getline(cin, s);
     for (int i = 0; i < n; i++)
     {
-        if (a[i].getName().find(s) != string::npos)
+        if ((a[i].getName().find(s) != string::npos) || (a[i].getMaSV().find(s) != string::npos))
         {
             cout << "thong tin sinh vien can tim: ";
             a[i].xuat();
@@ -93,18 +93,6 @@ int main()
         else
         {
             cout << "khong tim thay sinh vien can tim" << endl;
-        }
-    }
-    for (int i = 0; i < n; i++)
-    {
-        if (a[i].getMaSV().find(s) != string::npos)
-        {
-            cout << "thong tin sinh vien can tim: ";
-            a[i].xuat();
-        }
-        else
-        {
-            cout << "khong tim thay sinh vien can tim!" << endl;
         }
     }
 }
