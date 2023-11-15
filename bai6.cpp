@@ -46,7 +46,7 @@ void nguoi::nhap()
 }
 void nguoi::xuat()
 {
-    cout << left << setw(20) << hoTen << setw(10) << namSinh << endl;
+    cout << left << setw(20) << hoTen << setw(15) << namSinh;
 }
 string nguoi::getHoTen()
 {
@@ -90,21 +90,23 @@ int main()
         cout << "nhap sinh vien thu " << i << ":" << endl;
         a[i].nhap();
     }
+    cout << left << setw(20) << "ho ten" << setw(15) << "nam sinh" << setw(10) << "ma sv" << setw(5) << "gpa" << endl;
+
+    for (int i = 0; i < n; i++)
+    {
+        a[i].xuat();
+    }
     string s;
     cout << "nhap thong tin sinh vien can tim: ";
     cin.ignore();
     getline(cin, s);
-    cout << left << setw(20) << "ho ten" << setw(10) << "nam sinh" << setw(10) << "ma sv" << setw(5) << "gpa" << endl;
     for (int i = 0; i < n; i++)
     {
         if ((a[i].getHoTen().find(s) != string::npos) || (a[i].getMaSV().find(s) != string::npos))
         {
-            cout << "thong tin sinh vien can tim: ";
+            cout << "thong tin sinh vien can tim: " << endl;
+            cout << left << setw(20) << "ho ten" << setw(15) << "nam sinh" << setw(10) << "ma sv" << setw(5) << "gpa" << endl;
             a[i].xuat();
-        }
-        else
-        {
-            cout << "khong tim thay sinh vien can tim" << endl;
         }
     }
 }
