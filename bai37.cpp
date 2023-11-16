@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 #include <algorithm>
 using namespace std;
@@ -7,29 +8,29 @@ protected:
     string hoTen, gioiTinh, namSinh;
 
 public:
-    virtual void nhap();
-    virtual void xuat() = 0;
+    void nhap();
+    void xuat();
 };
-
 class sinhVien : public nguoi
 {
-protected:
-    double gpa;
+private:
+    double dtb;
 
 public:
-    virtual void nhap();
-    virtual void xuat() = 0;
+    void nhap();
+    void xuat();
 };
-class giangVien
+class giangVien : public nguoi
 {
-protected:
-    string mon;
+private:
+    string monHoc;
 
 public:
-    virtual void nhap();
-    virtual void xuat() = 0;
+    void nhap();
+    void xuat();
 };
 class troGiang : public giangVien, public sinhVien
+
 {
 private:
     string tenKhoaHoc;
@@ -40,59 +41,57 @@ public:
 };
 void nguoi::nhap()
 {
-    cout << "nhap ho ten: ";
-    // cin.ignore();
+    cout << "nhap ten nguoi: ";
     getline(cin, hoTen);
     cout << "nhap gioi tinh: ";
     getline(cin, gioiTinh);
     cout << "nhap nam sinh: ";
     getline(cin, namSinh);
 }
-void giangVien::nhap()
+void nguoi::xuat()
 {
-    cout << "nhap mon: ";
-    getline(cin, mon);
+    cout << "ten nguoi: " << hoTen << endl;
+    cout << "gioi tinh: " << gioiTinh << endl;
+    cout << "nam sinh: " << namSinh << endl;
 }
 void sinhVien::nhap()
 {
-    cout << "nhap gpa: ";
-    cin >> gpa;
+    nguoi::nhap();
+    cout << "nhap diem trung binh: ";
+    cin >> dtb;
+}
+void sinhVien::xuat()
+{
+    nguoi::xuat();
+    cout << "diem trung binh: " << dtb << endl;
+}
+void giangVien::nhap()
+{
+    cout << "nhap ten mon hoc: ";
+    cin.ignore();
+    getline(cin, monHoc);
+}
+void giangVien::xuat()
+{
+    cout << "ten mon hoc: " << monHoc << endl;
 }
 void troGiang::nhap()
 {
-    nguoi::nhap();
-    giangVien::nhap();
     sinhVien::nhap();
+    giangVien::nhap();
     cout << "nhap ten khoa hoc: ";
-    cin.ignore();
     getline(cin, tenKhoaHoc);
 }
 void troGiang::xuat()
 {
-    cout << "ho ten: " << hoTen << endl;
-    cout << "gioi tinh: " << gioiTinh << endl;
-    cout << "nam sinh: " << namSinh << endl;
-    cout << "mon: " << mon << endl;
-    cout << "gpa: " << gpa << endl;
+    sinhVien::xuat();
+    giangVien::xuat();
     cout << "ten khoa hoc: " << tenKhoaHoc << endl;
 }
 int main()
 {
-    int n;
-    cout << "nhap so tro giang: ";
-    cin >> n;
-    troGiang a[n];
-    cin.ignore();
-    for (int i = 0; i < n; i++)
-    {
-        int j = i + 1;
-        cout << "nhap thong tin tro giang thu " << j << ": ";
-        a[i].nhap();
-    }
-    for (int i = 0; i < n; i++)
-    {
-        int j = i + 1;
-        cout << "thong tin tro giang thu " << j << ": ";
-        a[i].xuat();
-    }
+    troGiang a;
+    a.nhap();
+    a.xuat();
+    return 0;
 }
