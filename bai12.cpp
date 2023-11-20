@@ -5,69 +5,120 @@ class monHoc
 {
 protected:
     string tenMonHoc;
-    int cc, kt, dt;
+    float diemCC, diemKT, diemDT;
 
 public:
-    double tinhHocPhan();
-    int getCC() { return cc; }
-    int getKT() { return kt; }
+    monHoc();
+    monHoc(string tenMonHoc, float diemCC, float diemKT, float diemDT);
+    void nhap();
+    void xuat();
+    float diemHocPhan();
+    float getDiemCC();
+    float getDiemKT();
 };
-
 class sinhVien : public monHoc
 {
 private:
-    string hoTen, lop, MaSV;
+    string hoTen, lop, maSV;
 
 public:
+    sinhVien();
+    sinhVien(string hoTen, string lop, string maSV, string tenMonHoc, float diemCC, float diemKT, float diemDT);
     void nhap();
     void xuat();
 };
-double monHoc::tinhHocPhan()
+monHoc::monHoc()
 {
-    return 1.0 * (cc * 0.1 + kt * 0.2 + dt * 0.7);
+    tenMonHoc = "";
+    diemCC = diemKT = diemDT = 0;
+}
+monHoc::monHoc(string tenMonHoc, float diemCC, float diemKT, float diemDT)
+{
+    this->tenMonHoc = tenMonHoc;
+    this->diemCC = diemCC;
+    this->diemKT = diemKT;
+    this->diemDT = diemDT;
+}
+sinhVien::sinhVien() : monHoc() // sinhVien a
+{
+    hoTen = "";
+    lop = "";
+    maSV = "";
+}
+sinhVien::sinhVien(string hoTen, string lop, string maSV, string tenMonHoc, float diemCC, float diemKT, float diemDT) : monHoc(tenMonHoc, diemCC, diemKT, diemDT)
+{
+    this->hoTen = hoTen;
+    this->lop = lop;
+    this->maSV = maSV;
+}
+float monHoc::diemHocPhan()
+{
+    return diemCC * 0.1 + diemKT * 0.3 + diemDT * 0.6;
+}
+void monHoc::nhap()
+{
+    cout << "Nhap ten mon hoc: ";
+    getline(cin, tenMonHoc);
+    cout << "Nhap diem chuyen can: ";
+    cin >> diemCC;
+    cout << "Nhap diem kiem tra: ";
+    cin >> diemKT;
+    cout << "Nhap diem thi: ";
+    cin >> diemDT;
+}
+void monHoc::xuat()
+{
+    cout << left << setw(20) << tenMonHoc << setw(10) << fixed << setprecision(2) << diemHocPhan() << endl;
 }
 void sinhVien::nhap()
 {
     cin.ignore();
-    cout << "nhap ho ten: ";
+    cout << "Nhap ho ten: ";
     getline(cin, hoTen);
-    cout << "nhap lop: ";
+    cout << "Nhap lop: ";
     getline(cin, lop);
-    cout << "nhap ma sinh vien: ";
-    getline(cin, MaSV);
-    cout << "nhap ten mon hoc: ";
-    getline(cin, tenMonHoc);
-    cout << "nhap diem chuyen can: ";
-    cin >> cc;
-    cout << "nhap diem kiem tra: ";
-    cin >> kt;
-    cout << "nhap diem thi: ";
-    cin >> dt;
+    cout << "Nhap ma sinh vien: ";
+    getline(cin, maSV);
+    monHoc::nhap();
 }
 void sinhVien::xuat()
 {
-    cout << left << setw(20) << hoTen << setw(20) << lop << setw(20) << MaSV << setw(20) << tenMonHoc << setw(10) << fixed << setprecision(2) << tinhHocPhan() << endl;
+    cout << left << setw(30) << hoTen << setw(10) << lop << setw(10) << maSV;
+    monHoc::xuat();
+}
+float monHoc::getDiemCC()
+{
+    return this->diemCC;
+}
+float monHoc::getDiemKT()
+{
+    return this->diemKT;
 }
 void tieuDe()
 {
-    cout << left << setw(20) << "ho ten" << setw(20) << "lop" << setw(20) << "ma sinh vien" << setw(20) << "ten mon hoc" << setw(10) << "diem trung binh" << endl;
+    cout << left << setw(30) << "Ho ten" << setw(10) << "Lop" << setw(10) << "Ma SV" << setw(20) << "Ten mon hoc" << setw(10) << "DHP" << endl;
 }
 int main()
 {
     int n;
-    cout << "nhap so luong sinh vien: ";
+    cout << "Nhap so luong sinh vien: ";
     cin >> n;
     sinhVien a[n];
     for (int i = 0; i < n; i++)
     {
-        cout << "nhap thong tin sinh vien thu " << i + 1 << endl;
+        cout << "Nhap thong tin sinh vien thu " << i + 1 << endl;
         a[i].nhap();
     }
-    cout << "nhung hoc sinh bi cam thi: " << endl;
     tieuDe();
     for (int i = 0; i < n; i++)
     {
-        if (a[i].getCC() < 5 || a[i].getKT() == 0)
+        a[i].xuat();
+    }
+    cout << "Danh sach sinh vien bi cam thi: " << endl;
+    tieuDe();
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i].getDiemCC() < 5 || a[i].getDiemKT() < 5)
         {
             a[i].xuat();
         }
