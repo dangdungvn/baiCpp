@@ -118,7 +118,7 @@ int main()
     tieuDe();
     for (int i = 0; i < n; i++)
     {
-        if (a[i].getDiemCC() < 5 || a[i].getDiemKT() < 5)
+        if (a[i].getDiemCC() < 5 || a[i].getDiemKT() == 0)
         {
             a[i].xuat();
         }
