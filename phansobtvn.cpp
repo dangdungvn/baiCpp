@@ -104,7 +104,15 @@ ps ps::operator-(ps a)
 
 bool ps::operator>(ps a)
 {
-    return tu * a.mau > a.tu * mau;
+    // return tu * a.mau > a.tu * mau;
+    if (tu * a.mau > a.tu * mau)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool cmp(ps a, ps b)
