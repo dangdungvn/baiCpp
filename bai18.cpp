@@ -1,89 +1,188 @@
 #include <bits/stdc++.h>
 #include <algorithm>
 using namespace std;
-class ps1
+
+int gcd(int a, int b)
+{
+    int minx = min(a, b);
+    for (int i = minx; i >= 1; i--)
+        if (a % i == 0 && b % i == 0)
+            return i;
+}
+
+class PS1
 {
 protected:
-    int tuSo, mauSo;
+    int tu, mau;
 
 public:
     void nhap();
     void xuat();
     void toiGian();
 };
-class ps2 : public ps1
+class PS2 : public PS1
 {
 public:
-    ps2 &operator=(const ps2 &);
-    bool operator>(ps2 &);
+    PS2();
+    PS2(int tu, int mau);
+    bool operator=(PS2 a);
+    bool operator<(PS2 a);
+    bool operator>(PS2 a);
+    PS2 operator+(PS2 a);
 };
-bool cmp(ps2 a, ps2 b);
-int gcd(int a, int b)
+
+void PS1::nhap()
 {
-    if (b == 0)
-    {
-        return a;
-    }
-    return gcd(b, a % b);
-}
-int lcm(int a, int b)
-{
-    return (a * b) / gcd(a, b);
-}
-void ps1::nhap()
-{
-    cout << "nhap tu so: ";
-    cin >> tuSo;
+    cout << "Nhap tu so: ";
+    cin >> tu;
     do
     {
-        cout << "nhap mau so: ";
-        cin >> mauSo;
-    } while (mauSo == 0);
+        cout << "Nhap mau so: ";
+        cin >> mau;
+        if (mau == 0)
+            cout << "Mau so khong hop le. Nhap lai!\n";
+    } while (mau == 0);
 }
-void ps1::toiGian()
+
+void PS1::xuat()
 {
-    int ucln = gcd(tuSo, mauSo);
-    tuSo /= ucln;
-    mauSo /= ucln;
+    cout << "(" << tu << "/" << mau << ")  ";
 }
-void ps1::xuat()
+
+void PS1::toiGian()
 {
-    cout << tuSo << "/" << mauSo << " ";
+    int ucln = gcd(tu, mau);
+    tu /= ucln;
+    mau /= ucln;
 }
-ps2 &ps2::operator=(const ps2 &a)
+
+PS2::PS2()
 {
-    tuSo = a.tuSo;
-    mauSo = a.mauSo;
-    return *this;
+    tu = 0;
+    mau = 1;
 }
-bool ps2::operator>(ps2 &a)
+
+PS2::PS2(int tu, int mau) // ps2 temp(1,2)
 {
-    if (tuSo * a.mauSo > a.tuSo * mauSo)
+    tu = tu;
+    mau = mau;
+}
+
+bool PS2::operator=(PS2 a)
+{
+    tu = a.tu;
+    mau = a.mau;
+    return true;
+}
+
+bool PS2::operator<(PS2 a)
+{
+    return tu * a.mau < mau * a.tu;
+}
+
+bool PS2::operator>(PS2 a)
+{
+    return tu * a.mau > mau * a.tu;
+}
+
+PS2 PS2::operator+(PS2 a)
+{
+    PS2 tong;
+    tong.tu = tu * a.mau + mau * a.tu;
+    tong.mau = mau * a.mau;
+    tong.toiGian();
+    return tong;
+}
+
+void nhap(PS2 a[], int n)
+{
+    for (int i = 0; i < n; i++)
     {
-        return true;
-    }
-    else
-    {
-        return false;
+        cout << "Nhap phan so thu " << i + 1 << ": " << endl;
+        a[i].nhap();
     }
 }
-bool cmp(ps2 a, ps2 b)
+
+void sapXep(PS2 a[], int n)
 {
-    return a > b;
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (a[i] < a[j])
+            {
+                PS2 temp;
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
+    cout << "mang phan so sau khi duoc sap xep: " << endl;
+    for (int i = 0; i < n; i++)
+        a[i].xuat();
+    cout << endl;
 }
+
+void minMax(PS2 a[], int n)
+{
+    PS2 min = a[0], max = a[0];
+    for (int i = 1; i < n; i++)
+    {
+        if (a[i] < min)
+            min = a[i];
+        if (a[i] > max)
+            max = a[i];
+    }
+    cout << "Phan so nho nhat: ";
+    min.xuat();
+    cout << endl;
+    cout << "Phan so lon nhat: ";
+    max.xuat();
+    cout << endl;
+}
+
+void tongA(PS2 a[], int n)
+{
+    PS2 tong;
+    PS2 temp(1, 2);
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] < temp)
+        {
+            tong = tong + a[i];
+        }
+    }
+    cout << "Tong cac phan so nho hon 1/2: ";
+    tong.xuat();
+    cout << endl;
+}
+
+void tongB(PS2 a[], int n)
+{
+    PS2 temp(1, 4);
+    PS2 tong;
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] > temp)
+        {
+            tong = tong + a[i];
+        }
+    }
+    cout << "Tong cac phan so lon hon 1/4: ";
+    tong.xuat();
+    cout << endl;
+}
+
 int main()
 {
     int n;
+    cout << "Nhap so luong phan so: ";
     cin >> n;
-    ps2 a[n];
-    for (int i = 0; i < n; i++)
-    {
-        a[i].nhap();
-        a[i].toiGian();
-    }
-    sort(a, a + n, cmp);
-    for (int i = 0; i < n; i++)
-    {
-        a[i].xuat();
-    }
+    PS2 a[n];
+    nhap(a, n);
+    sapXep(a, n);
+    minMax(a, n);
+    tongA(a, n);
+    tongB(a, n);
 }
