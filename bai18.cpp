@@ -16,7 +16,6 @@ int gcd(int a, int b)
         if (a % i == 0 && b % i == 0)
             return i;
 }
-
 class PS1
 {
 protected:
@@ -32,12 +31,21 @@ class PS2 : public PS1
 public:
     PS2();
     PS2(int tu, int mau);
-    bool operator=(PS2 a);
-    bool operator<(PS2 a);
-    bool operator>(PS2 a);
     PS2 operator+(PS2 a);
+    bool operator>(PS2 a);
+    bool operator<(PS2 a);
+    bool operator=(PS2 a);
 };
-
+PS2::PS2()
+{
+    tu = 0;
+    mau = 1;
+}
+PS2::PS2(int tu, int mau)
+{
+    this->tu = tu;
+    this->mau = mau;
+}
 void PS1::nhap()
 {
     cout << "Nhap tu so: ";
@@ -50,48 +58,16 @@ void PS1::nhap()
             cout << "Mau so khong hop le. Nhap lai!\n";
     } while (mau == 0);
 }
-
 void PS1::xuat()
 {
-    cout << "(" << tu << "/" << mau << ")  ";
+    cout << "(" << tu << "/" << mau << ")" << endl;
 }
-
 void PS1::toiGian()
 {
     int ucln = gcd(tu, mau);
     tu /= ucln;
     mau /= ucln;
 }
-
-PS2::PS2()
-{
-    tu = 0;
-    mau = 1;
-}
-
-PS2::PS2(int tu, int mau) // ps2 temp(1,2)
-{
-    tu = tu;
-    mau = mau;
-}
-
-bool PS2::operator=(PS2 a)
-{
-    tu = a.tu;
-    mau = a.mau;
-    return true;
-}
-
-bool PS2::operator<(PS2 a)
-{
-    return tu * a.mau < mau * a.tu;
-}
-
-bool PS2::operator>(PS2 a)
-{
-    return tu * a.mau > mau * a.tu;
-}
-
 PS2 PS2::operator+(PS2 a)
 {
     PS2 tong;
@@ -100,16 +76,28 @@ PS2 PS2::operator+(PS2 a)
     tong.toiGian();
     return tong;
 }
-
+bool PS2::operator>(PS2 a)
+{
+    return (tu * a.mau > mau * a.tu);
+}
+bool PS2::operator<(PS2 a)
+{
+    return (tu * a.mau < mau * a.tu);
+}
+bool PS2::operator=(PS2 a)
+{
+    tu = a.tu;
+    mau = a.mau;
+    return true;
+}
 void nhap(PS2 a[], int n)
 {
     for (int i = 0; i < n; i++)
     {
-        cout << "Nhap phan so thu " << i + 1 << ": " << endl;
+        cout << "Nhap phan so thu " << i + 1 << endl;
         a[i].nhap();
     }
 }
-
 void sapXep(PS2 a[], int n)
 {
     for (int i = 0; i < n - 1; i++)
@@ -118,19 +106,16 @@ void sapXep(PS2 a[], int n)
         {
             if (a[i] < a[j])
             {
-                PS2 temp;
-                temp = a[i];
+                PS2 temp = a[i];
                 a[i] = a[j];
                 a[j] = temp;
             }
         }
     }
-    cout << "mang phan so sau khi duoc sap xep: " << endl;
+    cout << "Danh sach sau khi sap xep: " << endl;
     for (int i = 0; i < n; i++)
         a[i].xuat();
-    cout << endl;
 }
-
 void minMax(PS2 a[], int n)
 {
     PS2 min = a[0], max = a[0];
@@ -143,12 +128,9 @@ void minMax(PS2 a[], int n)
     }
     cout << "Phan so nho nhat: ";
     min.xuat();
-    cout << endl;
     cout << "Phan so lon nhat: ";
     max.xuat();
-    cout << endl;
 }
-
 void tongA(PS2 a[], int n)
 {
     PS2 tong;
@@ -156,31 +138,23 @@ void tongA(PS2 a[], int n)
     for (int i = 0; i < n; i++)
     {
         if (a[i] < temp)
-        {
             tong = tong + a[i];
-        }
     }
     cout << "Tong cac phan so nho hon 1/2: ";
     tong.xuat();
-    cout << endl;
 }
-
 void tongB(PS2 a[], int n)
 {
-    PS2 temp(1, 4);
     PS2 tong;
+    PS2 temp(1, 4);
     for (int i = 0; i < n; i++)
     {
         if (a[i] > temp)
-        {
             tong = tong + a[i];
-        }
     }
     cout << "Tong cac phan so lon hon 1/4: ";
     tong.xuat();
-    cout << endl;
 }
-
 int main()
 {
     int n;
