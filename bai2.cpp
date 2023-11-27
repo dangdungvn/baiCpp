@@ -12,8 +12,8 @@ public:
     daThuc(int bac);
     // void nhap();
     // void xuat();
-    friend istream &operator>>(istream &, daThuc &);
-    friend ostream &operator<<(ostream &, daThuc);
+    friend istream &operator>>(istream &in, daThuc &);
+    friend ostream &operator<<(ostream &out, daThuc);
     daThuc operator+(daThuc);
     daThuc operator-(daThuc);
 };
