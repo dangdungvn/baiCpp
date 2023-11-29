@@ -17,8 +17,8 @@ private:
     double dtb;
 
 public:
-    void nhap();
-    void xuat();
+    virtual void nhap();
+    virtual void xuat();
 };
 class giangVien : public nguoi
 {
@@ -26,8 +26,8 @@ private:
     string monHoc;
 
 public:
-    void nhap();
-    void xuat();
+    virtual void nhap();
+    virtual void xuat();
 };
 class troGiang : public giangVien, public sinhVien
 
