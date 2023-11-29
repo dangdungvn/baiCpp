@@ -1,36 +1,35 @@
-
 #include <bits/stdc++.h>
 #include <algorithm>
 using namespace std;
+using ll = long long;
 class nguoi
 {
 protected:
     string hoTen, gioiTinh, namSinh;
 
 public:
+    virtual void nhap();
+    virtual void xuat();
+};
+class sinhVien : virtual public nguoi
+{
+protected:
+    double diemTB;
+
+public:
     void nhap();
     void xuat();
 };
-class sinhVien : public nguoi
+class giangVien : virtual public nguoi
 {
-private:
-    double dtb;
+protected:
+    string monGiangDay;
 
 public:
-    virtual void nhap();
-    virtual void xuat();
+    void nhap();
+    void xuat();
 };
-class giangVien : public nguoi
-{
-private:
-    string monHoc;
-
-public:
-    virtual void nhap();
-    virtual void xuat();
-};
-class troGiang : public giangVien, public sinhVien
-
+class troGiang : public sinhVien, public giangVien
 {
 private:
     string tenKhoaHoc;
@@ -41,57 +40,67 @@ public:
 };
 void nguoi::nhap()
 {
-    cout << "nhap ten nguoi: ";
+    cout << "Nhap ho ten: ";
     getline(cin, hoTen);
-    cout << "nhap gioi tinh: ";
+    cout << "Nhap gioi tinh: ";
     getline(cin, gioiTinh);
-    cout << "nhap nam sinh: ";
+    cout << "Nhap nam sinh: ";
     getline(cin, namSinh);
 }
 void nguoi::xuat()
 {
-    cout << "ten nguoi: " << hoTen << endl;
-    cout << "gioi tinh: " << gioiTinh << endl;
-    cout << "nam sinh: " << namSinh << endl;
+    cout << setw(20) << left << hoTen << setw(6) << gioiTinh << setw(6) << namSinh;
 }
 void sinhVien::nhap()
 {
-    nguoi::nhap();
-    cout << "nhap diem trung binh: ";
-    cin >> dtb;
+    cout << "Nhap diem trung binh: ";
+    cin >> diemTB;
+    cin.ignore();
 }
 void sinhVien::xuat()
 {
-    nguoi::xuat();
-    cout << "diem trung binh: " << dtb << endl;
+    cout << setw(6) << diemTB;
 }
 void giangVien::nhap()
 {
-    cout << "nhap ten mon hoc: ";
-    cin.ignore();
-    getline(cin, monHoc);
+    cout << "Nhap mon giang day: ";
+    getline(cin, monGiangDay);
 }
 void giangVien::xuat()
 {
-    cout << "ten mon hoc: " << monHoc << endl;
+    cout << setw(20) << monGiangDay;
 }
 void troGiang::nhap()
 {
+    nguoi::nhap();
     sinhVien::nhap();
     giangVien::nhap();
-    cout << "nhap ten khoa hoc: ";
+    cout << "Nhap ten khoa hoc: ";
     getline(cin, tenKhoaHoc);
 }
 void troGiang::xuat()
 {
+    nguoi::xuat();
     sinhVien::xuat();
     giangVien::xuat();
-    cout << "ten khoa hoc: " << tenKhoaHoc << endl;
+    cout << setw(15) << tenKhoaHoc << endl;
 }
 int main()
 {
-    troGiang a;
-    a.nhap();
-    a.xuat();
-    return 0;
+    int n;
+    cout << "Nhap so luong tro giang: ";
+    cin >> n;
+    troGiang *a = new troGiang[n];
+    cin.ignore();
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Nhap thong tin tro giang thu " << i + 1 << endl;
+        a[i].nhap();
+    }
+    cout << setw(20) << left << "Ho ten" << setw(6) << "GT" << setw(6) << "NS" << setw(6) << "DTB" << setw(20) << "Mon giang day" << setw(15) << "Ten khoa hoc" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        a[i].xuat();
+    }
+    delete[] a;
 }
