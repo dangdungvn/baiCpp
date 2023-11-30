@@ -11,6 +11,10 @@ public:
     void xuat();
     double tongDiem();
     string getName();
+    string getMts()
+    {
+        return this->mts;
+    }
     friend void xapXep(thiSinh svi[], int n);
     friend void xapXep1(thiSinh svi[], int n);
 };
@@ -77,6 +81,10 @@ void xapXep(thiSinh tsi[], int n)
 //         tsi[i].xuat();
 //     }
 // }
+void tieuDe()
+{
+    cout << left << setw(20) << "Ma Sinh vien" << setw(30) << "Ten Sinh vien" << setw(10) << "Tong diem" << endl;
+}
 int main()
 {
     int n;
@@ -131,13 +139,28 @@ int main()
     string s;
     cout << "nhap ten sinh vien can tim: ";
     cin >> s;
+    int dem = 0;
     for (int i = 0; i < n; i++)
     {
         if (tsi[i].getName().find(s) != string::npos)
         {
-            cout << "thong tin sinh vien can tim: ";
+            cout << "danh sach sinh vien co ten " << s << ":" << endl;
+            tieuDe();
             tsi[i].xuat();
+            dem++;
         }
+        else if (tsi[i].getMts().find(s) != string::npos)
+        {
+
+            cout << "thong tin sinh vien co ma " << s << ": " << endl;
+            tieuDe();
+            tsi[i].xuat();
+            dem++;
+        }
+    }
+    if (dem == 0)
+    {
+        cout << "khong tim thay sinh vien nao co ten " << s << endl;
     }
     delete[] tsi;
 }
