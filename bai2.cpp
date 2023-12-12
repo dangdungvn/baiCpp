@@ -10,8 +10,10 @@ private:
 public:
     daThuc();
     daThuc(int bac);
-    void nhap();
-    void xuat();
+    // void nhap();
+    // void xuat();
+    friend istream &operator>>(istream &in, daThuc &);
+    friend ostream &operator<<(ostream &out, daThuc);
     daThuc operator+(daThuc);
     daThuc operator-(daThuc);
 };
@@ -27,36 +29,66 @@ daThuc::daThuc(int bac)
         heSo[i] = 0;
     }
 }
-
-void daThuc::nhap()
+istream &operator>>(istream &in, daThuc &a)
 {
     cout << "nhap bac da thuc: ";
-    cin >> bacDaThuc;
-    for (int i = bacDaThuc; i >= 0; i--)
+    in >> a.bacDaThuc;
+    for (int i = a.bacDaThuc; i >= 0; i--)
     {
         cout << "nhap he so cua x^" << i << ": ";
-        cin >> heSo[i];
+        in >> a.heSo[i];
     }
+    return in;
 }
-void daThuc::xuat()
+ostream &operator<<(ostream &out, daThuc a)
 {
-    for (int i = bacDaThuc; i >= 0; i--)
+    for (int i = a.bacDaThuc; i >= 0; i--)
     {
         if (i > 1)
         {
-            cout << heSo[i] << "x^" << i << " + ";
+            out << a.heSo[i] << "x^" << i << " + ";
         }
         else if (i == 1)
         {
-            cout << heSo[i] << "x + ";
+            out << a.heSo[i] << "x + ";
         }
         else
         {
-            cout << heSo[i];
+            out << a.heSo[i];
         }
     }
-    cout << endl;
+    out << endl;
+    return out;
 }
+// void daThuc::nhap()
+// {
+//     cout << "nhap bac da thuc: ";
+//     cin >> bacDaThuc;
+//     for (int i = bacDaThuc; i >= 0; i--)
+//     {
+//         cout << "nhap he so cua x^" << i << ": ";
+//         cin >> heSo[i];
+//     }
+// }
+// void daThuc::xuat()
+// {
+//     for (int i = bacDaThuc; i >= 0; i--)
+//     {
+//         if (i > 1)
+//         {
+//             cout << heSo[i] << "x^" << i << " + ";
+//         }
+//         else if (i == 1)
+//         {
+//             cout << heSo[i] << "x + ";
+//         }
+//         else
+//         {
+//             cout << heSo[i];
+//         }
+//     }
+//     cout << endl;
+// }
 daThuc daThuc::operator+(daThuc a)
 {
     int maxBac = max(this->bacDaThuc, a.bacDaThuc);
@@ -89,14 +121,12 @@ int main()
 {
     daThuc a, b, c;
     cout << "nhap da thuc a: " << endl;
-    a.nhap();
+    cin >> a;
     cout << "nhap da thuc b: " << endl;
-    b.xuat();
+    cin >> b;
     c = a + b;
-    cout << "da thuc c = a + b: ";
-    c.xuat();
+    cout << "da thuc c = a + b: " << c;
     c = a - b;
-    cout << "da thuc c = a - b: ";
-    c.xuat();
+    cout << "da thuc c = a - b: " << c;
     return 0;
 }
