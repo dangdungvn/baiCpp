@@ -43,17 +43,81 @@ ostream &operator<<(ostream &out, daThuc a)
 {
     for (int i = a.bacDaThuc; i >= 0; i--)
     {
-        if (i > 1)
+        if (i == a.bacDaThuc)
         {
-            out << a.heSo[i] << "x^" << i << " + ";
+            if (a.heSo[i] > 1)
+            {
+                out << a.heSo[i] << "x^" << i << " ";
+            }
+            else if (a.heSo[i] == 1)
+            {
+                out << "x^" << i << " ";
+            }
+            else if (a.heSo[i] < -1)
+            {
+                out << "- " << abs(a.heSo[i]) << "x^" << i << " ";
+            }
+            else if (a.heSo[i] == -1)
+            {
+                out << "- x^" << i << " ";
+            }
+            else
+            {
+                out << "";
+            }
+        }
+        else if (i < a.bacDaThuc && i > 1)
+        {
+            if (a.heSo[i] > 1)
+            {
+                out << "+ " << a.heSo[i] << "x^" << i << " ";
+            }
+            else if (a.heSo[i] == 1)
+            {
+                out << "+ x^" << i << " ";
+            }
+            else if (a.heSo[i] < -1)
+            {
+                out << "- " << abs(a.heSo[i]) << "x^" << i << " ";
+            }
+            else if (a.heSo[i] == -1)
+            {
+                out << "- x^" << i << " ";
+            }
+            else
+            {
+                out << "";
+            }
         }
         else if (i == 1)
         {
-            out << a.heSo[i] << "x + ";
+            if (a.heSo[i] > 0)
+            {
+                out << "+ " << a.heSo[i] << "x ";
+            }
+            else if (a.heSo[i] < 0)
+            {
+                out << "- " << abs(a.heSo[i]) << "x ";
+            }
+            else
+            {
+                out << "";
+            }
         }
         else
         {
-            out << a.heSo[i];
+            if (a.heSo[i] > 0)
+            {
+                out << "+ " << a.heSo[i];
+            }
+            else if (a.heSo[i] < 0)
+            {
+                out << "- " << abs(a.heSo[i]);
+            }
+            else
+            {
+                out << "";
+            }
         }
     }
     out << endl;
