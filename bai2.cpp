@@ -180,7 +180,7 @@ daThuc daThuc::operator-(daThuc a)
     }
     return temp;
 }
-int main()
+main()
 {
     daThuc a, b, c;
     cout << "nhap da thuc a: " << endl;
