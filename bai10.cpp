@@ -104,25 +104,5 @@ int main()
         a[i].xuat();
     }
     cout << "danh sach can bo sau khi sap xep: " << endl;
-    long long b[n];
-    for (int i = 0; i < n; i++)
-    {
-        b[i] = a[i].getHeSoLuong() * a[i].getLuongCoBan();
-    }
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (b[i] < b[j])
-            {
-                swap(b[i], b[j]);
-                swap(a[i], a[j]);
-            }
-        }
-    }
-    tieuDe();
-    for (int i = 0; i < n; i++)
-    {
-        a[i].xuat();
-    }
+    xapXep(a, n);
 }
