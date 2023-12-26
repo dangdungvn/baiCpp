@@ -1,14 +1,6 @@
 #include <bits/stdc++.h>
-#include <algorithm>
 using namespace std;
-// int gcd(int a, int b)
-// {
-//     if (b == 0)
-//     {
-//         return a;
-//     }
-//     return gcd(b, a % b);
-// }
+
 class ps1
 {
 protected:
@@ -75,22 +67,45 @@ bool ps2::operator<(ps2 &a)
         return false;
     }
 }
-bool cmp(ps2 a, ps2 b)
+void minMax(ps2 a[], int n)
 {
-    return a < b;
+    ps2 min = a[0], max = a[0];
+    for (int i = 1; i < n; i++)
+    {
+        if (a[i] < min)
+        {
+            min = a[i];
+        }
+        if (max < a[i])
+        {
+            max = a[i];
+        }
+    }
+    cout << "phan so nho nhat: ";
+    min.xuat();
+    cout << endl;
+    cout << "phan so lon nhat: ";
+    max.xuat();
+    cout << endl;
 }
+
 int main()
 {
     int n;
+    cout << "nhap so luong phan so:";
     cin >> n;
     ps2 a[n];
     for (int i = 0; i < n; i++)
     {
+        cout << "nhap phan so thu " << i + 1 << ": ";
         a[i].nhap();
         a[i].toiGian();
     }
-    sort(a, a + n, cmp);
-    a[n - 1].xuat();
+    cout << "danh sach phan so: ";
+    for (int i = 0; i < n; i++)
+    {
+        a[i].xuat();
+    }
     cout << endl;
-    a[0].xuat();
+    minMax(a, n);
 }
