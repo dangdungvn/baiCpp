@@ -14,8 +14,6 @@ public:
     float getDiem();
     string getName();
 };
-bool cmp(SinhVien a, SinhVien b);
-bool cmp1(SinhVien a, SinhVien b);
 SinhVien::SinhVien()
 {
     maSV = name = "";
@@ -46,23 +44,77 @@ void SinhVien::in()
 }
 float SinhVien::getDiem()
 {
-    return (this->diemToan + this->diemLy + this->diemHoa);
+    return (diemToan + diemLy + diemHoa);
 }
 string SinhVien::getName()
 {
-    return this->name;
-}
-bool cmp(SinhVien a, SinhVien b)
-{
-    return a.getDiem() > b.getDiem();
-}
-bool cmp1(SinhVien a, SinhVien b)
-{
-    return a.getName() < b.getName();
+    return name;
 }
 void SinhVien::out()
 {
     cout << left << setw(20) << maSV << setw(30) << name << setw(10) << getDiem() << endl;
+}
+void tieude()
+{
+    cout << left << setw(20) << "maSV" << setw(30) << "Ho Ten" << setw(10) << "Diem" << endl;
+}
+void nhap(SinhVien a[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        a[i].in();
+    }
+}
+void sapXep(SinhVien a[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (a[i].getDiem() < a[j].getDiem())
+            {
+                SinhVien temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
+    cout << "Danh sach sinh vien sau khi sap xep: " << endl;
+    tieude();
+    for (int i = 0; i < n; i++)
+    {
+        a[i].out();
+    }
+}
+void maxDiem(SinhVien a[], int n)
+{
+    SinhVien max = a[0];
+    for (int i = 1; i < n; i++)
+    {
+        if (max.getDiem() < a[i].getDiem())
+        {
+            max = a[i];
+        }
+    }
+    cout << "Sinh vien co diem cao nhat la: " << endl;
+    tieude();
+    max.out();
+}
+void timKiem(SinhVien a[], int n)
+{
+    string s;
+    cout << "Nhap ten sinh vien can tim: ";
+    cin.ignore();
+    getline(cin, s);
+    cout << "Danh sach sinh vien co ten " << s << " la: " << endl;
+    tieude();
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i].getName().find(s) != string::npos)
+        {
+            a[i].out();
+        }
+    }
 }
 int main()
 {
@@ -70,30 +122,10 @@ int main()
     cin >> n;
     SinhVien *svi;
     svi = new SinhVien[n];
-    for (int i = 0; i < n; i++)
-    {
-        svi[i].in();
-    }
-    cout << "Sinh vien co diem cao nhat:" << endl;
-    sort(svi, svi + n, cmp);
-    svi[0].out();
-    cout << "Danh sach cac sinh vien theo ten:" << endl;
-    sort(svi, svi + n, cmp1);
-    cout << left << setw(20) << "Ma Sinh vien" << setw(30) << "Ten Sinh vien" << setw(10) << "GPA" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        svi[i].out();
-    }
-    string s;
-    cout << "nhap ten sinh vien can tim: ";
-    cin >> s;
-
-    for (int i = 0; i < n; i++)
-    {
-        if (svi[i].getName().find(s) != string::npos)
-        {
-            svi[i].out();
-        }
-    }
+    nhap(svi, n);
+    sapXep(svi, n);
+    maxDiem(svi, n);
+    timKiem(svi, n);
+    delete[] svi;
     return 0;
 }

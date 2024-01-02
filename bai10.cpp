@@ -20,7 +20,6 @@ public:
     long long tinhLuong();
     long long getLuongCoBan();
     long long getHeSoLuong();
-    friend void xapXep(canBo a[], int n);
 };
 void nhanSu::nhap()
 {

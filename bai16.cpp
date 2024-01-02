@@ -77,8 +77,21 @@ int main()
     {
         b[i] = a[i].getCanh();
     }
-    int *it = max_element(b, b + n);
-    int index = distance(b, it);
-    cout << "dien tich lon nhat la: " << (*it) * (*it) << endl;
-    cout << "vi tri cua hinh vuong do: " << index;
+    int maxCanh = a[0].getCanh();
+    for (int i = 1; i < n; i++)
+    {
+        if (maxCanh < a[i].getCanh())
+        {
+            maxCanh = a[i].getCanh();
+        }
+    }
+    cout << "dien tich lon nhat la: " << maxCanh * maxCanh << endl;
+    cout << "vi tri cua hinh vuong do: ";
+    for (int i = 0; i < n; i++)
+    {
+        if (maxCanh == a[i].getCanh())
+        {
+            cout << i << " ";
+        }
+    }
 }

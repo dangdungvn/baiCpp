@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <algorithm>
 using namespace std;
 // int gcd(int a, int b)
 // {
